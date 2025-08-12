@@ -19,6 +19,8 @@ nav a {
     font-size: 18px;
     font-weight: 400;
     text-decoration: none;
+
+    color: white;
 }
 
 nav a:hover {
@@ -46,4 +48,23 @@ nav a:hover {
 
   padding: 20px;
   margin-top: 20px;
+}
+
+.jumbotron {
+  font-size: 20px;
+  padding: 60px;
+  background-color: #00c8eb;
+  text-align: center;
+  color: white;
+}
+
+nav li {
+  display: inline;
+  list-style-type: none;
+  margin-right: 20px;
+}
+
+nav {
+   background-color: #00a2c6;
+   padding: 5px;
 }
