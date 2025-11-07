@@ -3,17 +3,16 @@
 
 <head>
     <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Namtan</title>
 
     <!-- My Own Styles -->
     <link rel="stylesheet" href="assets/styles/style.css">
 
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap"
-        rel="stylesheet">
+    <!-- Font Awesome 5.15.4 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+        integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer">
 </head>
 
 <body>
@@ -36,7 +35,7 @@
         </nav>
     </header>
     <main>
-        <div id="content">
+        <div id="content" class="card">
             <article id="biografi">
                 <h2>Biografi</h2>
                 <p>Tipnaree Weerawatnodom, nicknamed Namtan, is a Thai actress managed by GMM TV. Raised in Ayutthaya
@@ -53,6 +52,14 @@
             <article id="drama">
                 <h2>Drama</h2>
                 <table>
+                    <colgroup>
+                        <col style="width: 10%;">
+                        <col style="width: 40%;">
+                        <col style="width: 10%;">
+                        <col style="width: 30%;">
+                        <col style="width: 10%;">
+
+                    </colgroup>
                     <tr>
                         <th>Year</th>
                         <th>Title</th>
@@ -179,48 +186,63 @@
             </article>
         </div>
         <aside>
-            <img src="assets/image/namtan-tipnaree.jpg" alt="Tipnaree Weerawatnodom">
-            <table>
-                <tr>
-                    <th>Nickname</th>
-                    <td>Namtan</td>
-                </tr>
-                <tr>
-                    <th>Full Name</th>
-                    <td>Tipnaree Weerawatnodom</td>
-                </tr>
-                <tr>
-                    <th>Birthdate</th>
-                    <td>June 1, 1996 (age 27)</td>
-                </tr>
-                <tr>
-                    <th>Birthplace</th>
-                    <td>Ayutthaya, Thailand</td>
-                </tr>
-                <tr>
-                    <th>Height</th>
-                    <td>165 cm (5 ft 5 in)</td>
-                </tr>
-                <tr>
-                    <th>Education</th>
-                    <td>Srinakharinwirot University (BFA, MFA)</td>
-                </tr>
-                <tr>
-                    <th>Occupation</th>
-                    <td>Actress, Host</td>
-                </tr>
-                <tr>
-                    <th>Years Active</th>
-                    <td>2013–present</td>
-                </tr>
-                <tr>
-                    <th>Agent</th>
-                    <td>GMMTV</td>
-                </tr>
-            </table>
+            <article class="card profile">
+                <h4>Namtan Tipnaree Weerawatnodom</h4>
+                <img src="assets/image/namtan-tipnaree.jpg" alt="Tipnaree Weerawatnodom">
+                <div class="social-media">
+                    <ul>
+                        <li><a href="https://www.instagram.com/namtan.tipnaree/"><i class="fab fa-instagram"></i></a></li>
+                        <li><a href="https://x.com/NamtanTipnaree"><i class="fab fa-twitter"></i></a></li>
+                        <li><a href="https://www.tiktok.com/@namtantipnaree"><i class="fa-brands fa-tiktok"></i></a></li>
+                    </ul>
+                </div>
+            </article>
+            <article class="card details">
+                <h4>Details</h4>
+                <table>
+                    <tr>
+                        <th>Nickname</th>
+                        <td>Namtan</td>
+                    </tr>
+                    <tr>
+                        <th>Full Name</th>
+                        <td>Tipnaree Weerawatnodom</td>
+                    </tr>
+                    <tr>
+                        <th>Birthdate</th>
+                        <td>June 1, 1996 (age 27)</td>
+                    </tr>
+                    <tr>
+                        <th>Birthplace</th>
+                        <td>Ayutthaya, Thailand</td>
+                    </tr>
+                    <tr>
+                        <th>Height</th>
+                        <td>165 cm (5 ft 5 in)</td>
+                    </tr>
+                    <tr>
+                        <th>Education</th>
+                        <td>Srinakharinwirot University (BFA, MFA)</td>
+                    </tr>
+                    <tr>
+                        <th>Occupation</th>
+                        <td>Actress, Host</td>
+                    </tr>
+                    <tr>
+                        <th>Years Active</th>
+                        <td>2013–present</td>
+                    </tr>
+                    <tr>
+                        <th>Agent</th>
+                        <td>GMMTV</td>
+                    </tr>
+                </table>
+            </article>
         </aside>
     </main>
-    <footer></footer>
+    <footer>
+        <p>Created by arfh02 | &copy; 2024 Namtan Fan Page</p>
+    </footer>
 </body>
 
 </html>

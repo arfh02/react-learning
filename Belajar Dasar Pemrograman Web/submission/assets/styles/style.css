@@ -1,0 +1,182 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: sans-serif;
+    background-color: rgb(220, 225, 239);
+
+    margin: 0;
+    padding: 0;
+}
+
+footer {
+    padding: 20px;
+    color: white;
+    background-color: #1675b6;
+    text-align: center;
+    font-weight: 300;
+}
+
+nav a {
+    font-size: 16px;
+    font-weight: 500;
+    text-decoration: none;
+    color: white;
+}
+
+nav a:hover {
+    font-weight: bold;
+}
+
+.profile {
+    text-align: center;
+}
+
+.profile img {
+    width: 100%
+}
+
+.card {
+    background-color: white;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    border-radius: 5px;
+    padding: 8px;
+
+}
+
+nav ul {
+    padding-inline: 4rem;
+    display: flex;
+}
+
+nav li {
+    list-style-type: none;
+    margin-right: 20px;
+}
+
+nav {
+    padding: 5px;
+
+    position: sticky;
+    top: 0;
+}
+
+article {
+    scroll-margin-top: 40px;
+}
+
+main {
+    padding: 15px;
+    display: flex;
+    gap: 1.5rem;
+}
+
+aside {
+    flex: 1;
+}
+
+header {
+    position: sticky;
+    top: 0;
+    background-color: #3972b4;
+}
+
+article {
+    padding: 8px;
+}
+
+#biografi p {
+    text-align: justify;
+}
+
+table {
+    width: 100%;
+    text-align: center;
+}
+
+#content {
+    flex: 3;
+}
+
+#content table tr:first-child {
+    box-shadow: black 0px 2px 0px;
+    padding-top: 100px;
+}
+
+#content th {
+    padding: 10px 0px 10px 0px;
+}
+
+#content tr {
+    box-shadow: black 0px 0.05px 0px;
+}
+
+h4{
+    color: #3972b4;
+    margin-top: 5px;
+}
+
+.social-media {
+    width: 100%;
+}
+
+.social-media ul {
+    padding: 0;
+
+    display: flex;
+    justify-content: space-around;
+}
+
+.social-media li {
+    list-style-type: none;
+}
+
+i {
+    font-size: 20px;
+    color: #3972b4;
+}
+
+.details {
+    margin-top: 1.5rem;
+    padding-bottom: 25px;
+}
+
+.details th, .details td {
+    text-align: start;
+    font-size: small;
+}
+
+
+
+/* <= 1200px  */
+@media screen and (min-width: 1200px) {
+
+    nav,
+    main {
+        width: 1200px;
+        margin: 0 auto;
+    }
+}
+
+/* <= 1200px  */
+@media screen and (max-width: 1200px) {
+    main {
+        flex-flow: column nowrap;
+    }
+
+    main aside {
+        align-self: center;
+    }
+}
+
+/* <= 768px */
+@media screen and (max-width: 768px) {
+    nav ul {
+        justify-content: center;
+    }
+
+    main aside {
+        align-self: stretch;
+    }
+}
