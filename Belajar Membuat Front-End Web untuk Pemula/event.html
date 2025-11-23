@@ -26,9 +26,9 @@
   </style>
 </head>
 
-<body onload="welcome()">
+<body>
   <div class="contents" hidden>
-    <button id="incrementButton" onclick="increment()">Tekan Aku :)</button>
+    <button id="incrementButton">Tekan Aku :)</button>
     <h3>Kamu sudah menekan tombol di atas sebanyak <span id="count">0</span></h3>
   </div>
 
@@ -55,8 +55,8 @@
       }
     }
 
-    // document.getElementById('incrementButton').onclick = increment;
-    // document.body.onload = welcome;
+    window.addEventListener('load', welcome);
+    document.getElementById('incrementButton').addEventListener('click', increment);
   </script>
 </body>
 
