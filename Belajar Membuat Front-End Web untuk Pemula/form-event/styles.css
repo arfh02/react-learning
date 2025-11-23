@@ -1,0 +1,20 @@
+.contents {
+  border: 2px solid black;
+  padding: 15px;
+ 
+  position: fixed;
+  top: 50%;
+  left: 50%;
+ 
+ 
+  transform: translate(-50%, -50%);
+}
+ 
+.contents h2 {
+  text-align: center;
+}
+
+.form-element {
+  margin: 8px;
+  text-align: left;
+}
