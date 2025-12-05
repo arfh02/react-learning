@@ -67,20 +67,49 @@ function makeBook(bookObject) {
     const textContainer = document.createElement('div');
     textContainer.append(textTitle, textAuthor, textYear);
 
+    const buttonUndo = document.createElement('button');
+
+    const buttonContainer = document.createElement('div');
+    buttonContainer.append(buttonUndo);
+
     const container = document.createElement('div');
     container.setAttribute('data-testid', `bookItem`);
     container.setAttribute('data-bookid', bookObject.id);
-    container.append(textContainer);
+    container.append(textContainer, buttonContainer);
 
     if (bookObject.isCompleted) {
+        buttonUndo.innerText = "Belum selesai dibaca";
         const completeList = document.getElementById('completeBookList');
         completeList.append(container);
     } else {
+        buttonUndo.innerText = "Selesai dibaca";
         const incompleteList = document.getElementById('incompleteBookList');
         incompleteList.append(container);
     }
 
+    buttonUndo.addEventListener('click', function () {
+        undoAction(bookObject.id);
+    });
+
     return container;
+}
+
+function undoAction(bookId) {
+    const bookTarget = findBook(bookId);
+    if (bookTarget == null) return;
+
+    bookTarget.isCompleted = !bookTarget.isCompleted;
+    document.dispatchEvent(new Event(RENDER_EVENT));
+    saveData();
+}
+
+function findBook(bookId) {
+    for (const bookItem of books) {
+        if (bookItem.id === bookId) {
+            return bookItem;
+        }
+    }
+    return null;
 }
 
 function saveData() {
