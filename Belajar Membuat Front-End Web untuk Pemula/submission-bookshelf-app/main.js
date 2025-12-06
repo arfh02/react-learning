@@ -9,9 +9,11 @@ document.addEventListener('DOMContentLoaded', function () {
         event.preventDefault();
         addBook();
     });
+
     if (isStorageExist()) {
         loadDataFromStorage();
     }
+
     const searchForm = document.getElementById('searchBook');
     searchForm.addEventListener('submit', function (event) {
         event.preventDefault();
@@ -38,18 +40,13 @@ function generateId() {
 }
 
 function generateBookObject(id, title, author, year, isCompleted) {
-    return {
-        id,
-        title,
-        author,
-        year,
-        isCompleted
-    }
+    return { id, title, author, year, isCompleted };
 }
 
 document.addEventListener(RENDER_EVENT, function () {
     const unreadBook = document.getElementById('incompleteBookList');
     const readBook = document.getElementById('completeBookList');
+
     unreadBook.innerHTML = '';
     readBook.innerHTML = '';
 
@@ -74,11 +71,17 @@ function makeBook(bookObject) {
     textYear.innerText = bookObject.year;
 
     const buttonUndo = document.createElement('button');
+    buttonUndo.innerText = bookObject.isCompleted ?
+        "Belum selesai dibaca" : "Selesai dibaca";
+    buttonUndo.setAttribute('data-testid', `undoButton`);
+
     const buttonDelete = document.createElement('button');
     buttonDelete.innerText = "Hapus buku";
+    buttonDelete.setAttribute('data-testid', `bookItemDeleteButton`);
 
     const buttonEdit = document.createElement('button');
     buttonEdit.innerText = "Edit Buku";
+    buttonEdit.setAttribute('data-testid', `bookItemEditButton`);
 
     const buttonContainer = document.createElement('div');
     buttonContainer.append(buttonUndo, buttonDelete, buttonEdit);
@@ -91,16 +94,7 @@ function makeBook(bookObject) {
     container.setAttribute('data-bookid', bookObject.id);
     container.append(textContainer, buttonContainer);
 
-    if (bookObject.isCompleted) {
-        buttonUndo.innerText = "Belum selesai dibaca";
-        const completeList = document.getElementById('completeBookList');
-        completeList.append(container);
-    } else {
-        buttonUndo.innerText = "Selesai dibaca";
-        const incompleteList = document.getElementById('incompleteBookList');
-        incompleteList.append(container);
-    }
-
+    // EVENT LISTENERS
     buttonUndo.addEventListener('click', function () {
         undoAction(bookObject.id);
     });
@@ -126,12 +120,7 @@ function undoAction(bookId) {
 }
 
 function findBook(bookId) {
-    for (const bookItem of books) {
-        if (bookItem.id === bookId) {
-            return bookItem;
-        }
-    }
-    return null;
+    return books.find(book => book.id === bookId) || null;
 }
 
 function removeBook(bookId) {
@@ -144,24 +133,18 @@ function removeBook(bookId) {
 }
 
 function findBookIndex(bookId) {
-    for (const index in books) {
-        if (books[index].id === bookId) {
-            return index;
-        }
-    }
-    return -1;
+    return books.findIndex(book => book.id === bookId);
 }
 
 function saveData() {
     if (isStorageExist()) {
-        const parsed = JSON.stringify(books);
-        localStorage.setItem(STORAGE_KEY, parsed);
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(books));
         document.dispatchEvent(new Event(SAVED_EVENT));
     }
 }
 
 function isStorageExist() {
-    if (typeof (Storage) === undefined) {
+    if (typeof (Storage) === "undefined") {
         alert('Browser kamu tidak mendukung local storage');
         return false;
     }
@@ -170,7 +153,7 @@ function isStorageExist() {
 
 function loadDataFromStorage() {
     const serializedData = localStorage.getItem(STORAGE_KEY);
-    let data = JSON.parse(serializedData);
+    const data = JSON.parse(serializedData);
 
     if (data !== null) {
         for (const book of data) {
@@ -225,4 +208,4 @@ function editBook(bookId) {
         document.dispatchEvent(new Event(RENDER_EVENT));
         saveData();
     }
-}   
+}

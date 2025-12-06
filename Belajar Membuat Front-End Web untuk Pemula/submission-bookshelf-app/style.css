@@ -1,0 +1,148 @@
+/* ====== GLOBAL ====== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background: #f2f4f8;
+    padding-bottom: 50px;
+}
+
+header {
+    background: #5e95f5;
+    color: white;
+    padding: 20px 0;
+    text-align: center;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+/* ====== MAIN LAYOUT ====== */
+main {
+    width: 70%;
+    margin: 20px auto;
+}
+
+/* ====== SECTION STYLE ====== */
+section {
+    background: white;
+    padding: 20px 25px;
+    margin-top: 20px;
+    border-radius: 12px;
+    border: 1px solid #d5d5d5;
+}
+
+section h2 {
+    text-align: center;
+    margin-bottom: 18px;
+    color: #3d59a8;
+}
+
+/* ====== FORM ====== */
+form div {
+    margin-bottom: 12px;
+}
+
+form label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: bold;
+}
+
+form input[type="text"],
+form input[type="number"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+}
+
+form input[type="checkbox"] {
+    transform: scale(1.3);
+    margin-left: 10px;
+}
+
+#bookFormSubmit,
+#searchSubmit {
+    width: 100%;
+    background: #5e95f5;
+    color: white;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    font-size: 15px;
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+#bookFormSubmit:hover,
+#searchSubmit:hover {
+    background: #467ae0;
+}
+
+/* ====== BOOK LIST ====== */
+#incompleteBookList,
+#completeBookList {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+[data-testid="bookItem"] {
+    border: 1px solid #9b9b9b;
+    border-radius: 10px;
+    padding: 15px;
+    background: #fafafa;
+}
+
+[data-testid="bookItem"] h3 {
+    font-size: 22px;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+}
+
+[data-testid="bookItem"] p {
+    margin-bottom: 6px;
+    font-size: 15px;
+}
+
+/* ====== BUTTONS ====== */
+[data-testid="bookItem"] div button {
+    padding: 8px 14px;
+    margin-right: 8px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    color: white;
+    font-weight: bold;
+}
+
+/* selesai atau belum selesai dibaca */
+[data-testid="undoButton"] {
+    background: #1ea71e;
+}
+
+[data-testid="undoButton"]:hover {
+    background: #118611;
+}
+
+/* hapus buku */
+[data-testid="bookItemDeleteButton"] {
+    background: #a71717;
+}
+
+[data-testid="bookItemDeleteButton"]:hover {
+    background: #860e0e;
+}
+
+/* edit buku */
+[data-testid="bookItemEditButton"] {
+    background: #ffa726;
+}
+
+[data-testid="bookItemEditButton"]:hover {
+    background: #fb8c00;
+}
