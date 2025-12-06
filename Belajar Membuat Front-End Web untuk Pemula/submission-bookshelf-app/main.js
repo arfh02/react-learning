@@ -12,6 +12,11 @@ document.addEventListener('DOMContentLoaded', function () {
     if (isStorageExist()) {
         loadDataFromStorage();
     }
+    const searchForm = document.getElementById('searchBook');
+    searchForm.addEventListener('submit', function (event) {
+        event.preventDefault();
+        searchBook();
+    });
 });
 
 function addBook() {
@@ -166,4 +171,32 @@ function loadDataFromStorage() {
     }
 
     document.dispatchEvent(new Event(RENDER_EVENT));
+}
+
+function searchBook() {
+    const searchText = document.getElementById('searchBookTitle').value.toLowerCase();
+
+    const unreadBook = document.getElementById('incompleteBookList');
+    const readBook = document.getElementById('completeBookList');
+
+    unreadBook.innerHTML = '';
+    readBook.innerHTML = '';
+
+    for (const bookItem of books) {
+        const title = bookItem.title.toLowerCase();
+
+        if (title.includes(searchText)) {
+            const bookElement = makeBook(bookItem);
+
+            if (!bookItem.isCompleted) {
+                unreadBook.append(bookElement);
+            } else {
+                readBook.append(bookElement);
+            }
+        }
+    }
+
+    if (searchText === "") {
+        document.dispatchEvent(new Event(RENDER_EVENT));
+    }
 }
