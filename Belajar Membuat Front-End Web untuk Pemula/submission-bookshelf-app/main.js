@@ -77,8 +77,11 @@ function makeBook(bookObject) {
     const buttonDelete = document.createElement('button');
     buttonDelete.innerText = "Hapus buku";
 
+    const buttonEdit = document.createElement('button');
+    buttonEdit.innerText = "Edit Buku";
+
     const buttonContainer = document.createElement('div');
-    buttonContainer.append(buttonUndo, buttonDelete);
+    buttonContainer.append(buttonUndo, buttonDelete, buttonEdit);
 
     const textContainer = document.createElement('div');
     textContainer.append(textTitle, textAuthor, textYear);
@@ -101,8 +104,13 @@ function makeBook(bookObject) {
     buttonUndo.addEventListener('click', function () {
         undoAction(bookObject.id);
     });
+
     buttonDelete.addEventListener('click', function () {
         removeBook(bookObject.id);
+    });
+
+    buttonEdit.addEventListener('click', function () {
+        editBook(bookObject.id);
     });
 
     return container;
@@ -200,3 +208,21 @@ function searchBook() {
         document.dispatchEvent(new Event(RENDER_EVENT));
     }
 }
+
+function editBook(bookId) {
+    const bookTarget = findBook(bookId);
+    if (bookTarget == null) return;
+
+    const newTitle = prompt("Masukkan judul buku baru:", bookTarget.title);
+    const newAuthor = prompt("Masukkan penulis buku baru:", bookTarget.author);
+    const newYear = prompt("Masukkan tahun terbit buku baru:", bookTarget.year);
+
+    if (newTitle !== null && newAuthor !== null && newYear !== null) {
+        bookTarget.title = newTitle;
+        bookTarget.author = newAuthor;
+        bookTarget.year = newYear;
+
+        document.dispatchEvent(new Event(RENDER_EVENT));
+        saveData();
+    }
+}   
