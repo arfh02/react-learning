@@ -9,6 +9,9 @@ document.addEventListener('DOMContentLoaded', function () {
         event.preventDefault();
         addBook();
     });
+    if (isStorageExist()) {
+        loadDataFromStorage();
+    }
 });
 
 function addBook() {
@@ -44,6 +47,7 @@ document.addEventListener(RENDER_EVENT, function () {
     const readBook = document.getElementById('completeBookList');
     unreadBook.innerHTML = '';
     readBook.innerHTML = '';
+
     for (const bookItem of books) {
         const bookElement = makeBook(bookItem);
         if (!bookItem.isCompleted) {
@@ -64,13 +68,15 @@ function makeBook(bookObject) {
     const textYear = document.createElement('p');
     textYear.innerText = bookObject.year;
 
-    const textContainer = document.createElement('div');
-    textContainer.append(textTitle, textAuthor, textYear);
-
     const buttonUndo = document.createElement('button');
+    const buttonDelete = document.createElement('button');
+    buttonDelete.innerText = "Hapus buku";
 
     const buttonContainer = document.createElement('div');
-    buttonContainer.append(buttonUndo);
+    buttonContainer.append(buttonUndo, buttonDelete);
+
+    const textContainer = document.createElement('div');
+    textContainer.append(textTitle, textAuthor, textYear);
 
     const container = document.createElement('div');
     container.setAttribute('data-testid', `bookItem`);
@@ -89,6 +95,9 @@ function makeBook(bookObject) {
 
     buttonUndo.addEventListener('click', function () {
         undoAction(bookObject.id);
+    });
+    buttonDelete.addEventListener('click', function () {
+        removeBook(bookObject.id);
     });
 
     return container;
@@ -112,6 +121,24 @@ function findBook(bookId) {
     return null;
 }
 
+function removeBook(bookId) {
+    const bookTarget = findBookIndex(bookId);
+    if (bookTarget === -1) return;
+
+    books.splice(bookTarget, 1);
+    document.dispatchEvent(new Event(RENDER_EVENT));
+    saveData();
+}
+
+function findBookIndex(bookId) {
+    for (const index in books) {
+        if (books[index].id === bookId) {
+            return index;
+        }
+    }
+    return -1;
+}
+
 function saveData() {
     if (isStorageExist()) {
         const parsed = JSON.stringify(books);
@@ -126,4 +153,17 @@ function isStorageExist() {
         return false;
     }
     return true;
+}
+
+function loadDataFromStorage() {
+    const serializedData = localStorage.getItem(STORAGE_KEY);
+    let data = JSON.parse(serializedData);
+
+    if (data !== null) {
+        for (const book of data) {
+            books.push(book);
+        }
+    }
+
+    document.dispatchEvent(new Event(RENDER_EVENT));
 }
