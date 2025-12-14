@@ -25,10 +25,10 @@ function addBook() {
     const title = document.getElementById('bookFormTitle').value;
     const author = document.getElementById('bookFormAuthor').value;
     const year = document.getElementById('bookFormYear').value;
-    const isCompleted = document.getElementById('bookFormIsComplete').checked;
+    const isComplete = document.getElementById('bookFormIsComplete').checked;
 
     const id = generateId();
-    const bookObject = generateBookObject(id, title, author, year, isCompleted);
+    const bookObject = generateBookObject(id, title, author, Number(year), isComplete);
     books.push(bookObject);
 
     document.dispatchEvent(new Event(RENDER_EVENT));
@@ -39,8 +39,8 @@ function generateId() {
     return +new Date();
 }
 
-function generateBookObject(id, title, author, year, isCompleted) {
-    return { id, title, author, year, isCompleted };
+function generateBookObject(id, title, author, year, isComplete) {
+    return { id, title, author, year, isComplete };
 }
 
 document.addEventListener(RENDER_EVENT, function () {
@@ -52,7 +52,7 @@ document.addEventListener(RENDER_EVENT, function () {
 
     for (const bookItem of books) {
         const bookElement = makeBook(bookItem);
-        if (!bookItem.isCompleted) {
+        if (!bookItem.isComplete) {
             unreadBook.append(bookElement);
         } else {
             readBook.append(bookElement);
@@ -63,17 +63,20 @@ document.addEventListener(RENDER_EVENT, function () {
 function makeBook(bookObject) {
     const textTitle = document.createElement('h3');
     textTitle.innerText = bookObject.title;
+    textTitle.setAttribute('data-testid', `bookItemTitle`);
 
     const textAuthor = document.createElement('p');
-    textAuthor.innerText = bookObject.author;
+    textAuthor.innerText = 'Penulis: ' + bookObject.author;
+    textAuthor.setAttribute('data-testid', `bookItemAuthor`);
 
     const textYear = document.createElement('p');
-    textYear.innerText = bookObject.year;
+    textYear.innerText = 'Tahun: ' + bookObject.year;
+    textYear.setAttribute('data-testid', `bookItemYear`);
 
     const buttonUndo = document.createElement('button');
-    buttonUndo.innerText = bookObject.isCompleted ?
+    buttonUndo.innerText = bookObject.isComplete ?
         "Belum selesai dibaca" : "Selesai dibaca";
-    buttonUndo.setAttribute('data-testid', `undoButton`);
+    buttonUndo.setAttribute('data-testid', `bookItemIsCompleteButton`);
 
     const buttonDelete = document.createElement('button');
     buttonDelete.innerText = "Hapus buku";
@@ -114,7 +117,7 @@ function undoAction(bookId) {
     const bookTarget = findBook(bookId);
     if (bookTarget == null) return;
 
-    bookTarget.isCompleted = !bookTarget.isCompleted;
+    bookTarget.isComplete = !bookTarget.isComplete;
     document.dispatchEvent(new Event(RENDER_EVENT));
     saveData();
 }
@@ -157,7 +160,13 @@ function loadDataFromStorage() {
 
     if (data !== null) {
         for (const book of data) {
-            books.push(book);
+            books.push({ 
+                id: book.id,
+                title: book.title,
+                author: book.author,
+                year: book.year,          
+                isComplete: book.isComplete
+            });
         }
     }
 
@@ -179,7 +188,7 @@ function searchBook() {
         if (title.includes(searchText)) {
             const bookElement = makeBook(bookItem);
 
-            if (!bookItem.isCompleted) {
+            if (!bookItem.isComplete) {
                 unreadBook.append(bookElement);
             } else {
                 readBook.append(bookElement);
@@ -203,7 +212,7 @@ function editBook(bookId) {
     if (newTitle !== null && newAuthor !== null && newYear !== null) {
         bookTarget.title = newTitle;
         bookTarget.author = newAuthor;
-        bookTarget.year = newYear;
+        bookTarget.year = Number(newYear);
 
         document.dispatchEvent(new Event(RENDER_EVENT));
         saveData();

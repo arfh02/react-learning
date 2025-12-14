@@ -121,11 +121,11 @@ form input[type="checkbox"] {
 }
 
 /* selesai atau belum selesai dibaca */
-[data-testid="undoButton"] {
+[data-testid="bookItemIsCompleteButton"] {
     background: #1ea71e;
 }
 
-[data-testid="undoButton"]:hover {
+[data-testid="bookItemIsCompleteButton"]:hover {
     background: #118611;
 }
 
